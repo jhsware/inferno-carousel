@@ -408,12 +408,6 @@ export default class Carousel extends Component {
   }
 
   handleSwipe() {
-    // In order to animate the final part of the slide movement we need to make sure
-    // dragging is false before next render
-    this.setState({
-      dragging: false
-    });
-
     let slidesToShow = this.state.slidesToShow;
     if (this.props.slidesToScroll === 'auto') {
       slidesToShow = this.state.slidesToScroll;
@@ -591,7 +585,13 @@ export default class Carousel extends Component {
       return;
     }
 
-    this.setState({ hasInteraction: true, easing: easing[props.easing] });
+    // In order to animate the final part of the slide movement we need to make sure
+    // dragging is false before next render
+    this.setState({
+      hasInteraction: true,
+      dragging: false,
+      easing: easing[props.easing]
+    });
     this.isTransitioning = true;
     const previousSlide = this.state.currentSlide;
 
