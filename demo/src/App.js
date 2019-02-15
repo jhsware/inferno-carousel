@@ -1,5 +1,5 @@
 import { Component, Fragment } from 'inferno';
-import Carousel from 'inferno-carousel/src/index';
+import Carousel from 'inferno-carousel-pure/src/index';
 
 const colors = ['7732bb', '047cc0', '00884b', 'e3bc13', 'db7c00', 'aa231f'];
 
