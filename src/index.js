@@ -419,13 +419,15 @@ export default class Carousel extends Component {
           this.state.currentSlide >= this.state.slideCount - slidesToShow &&
           !this.props.wrapAround
         ) {
-          this.setState({ easing: easing[this.props.edgeEasing] });
+          this.touchObject = {}
+          this.setState({ dragging: false, easing: easing[this.props.edgeEasing] });
         } else {
           this.nextSlide();
         }
       } else if (this.touchObject.direction === -1) {
         if (this.state.currentSlide <= 0 && !this.props.wrapAround) {
-          this.setState({ easing: easing[this.props.edgeEasing] });
+          this.touchObject = {}
+          this.setState({ dragging: false, easing: easing[this.props.edgeEasing] });
         } else {
           this.previousSlide();
         }
