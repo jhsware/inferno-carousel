@@ -30,6 +30,7 @@
     "create-inferno-app": "^7.0.6",
     "cross-env": "^5.2.0",
     "inferno-bootstrap": "^7.2.0",
+    "inferno-clone-vnode": "^7.1.7",
     "inferno-devtools": "^7.0.4",
     "inferno-router": "^7.0.4",
     "inferno-scripts": "7.0.4",

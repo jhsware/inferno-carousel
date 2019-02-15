@@ -1,4 +1,4 @@
-import React from 'react';
+import { Component } from 'inferno'
 
 const defaultButtonStyles = disabled => ({
   border: 0,
@@ -9,7 +9,7 @@ const defaultButtonStyles = disabled => ({
   cursor: disabled ? 'not-allowed' : 'pointer'
 });
 
-export class PreviousButton extends React.Component {
+export class PreviousButton extends Component {
   constructor() {
     super(...arguments);
     this.handleClick = this.handleClick.bind(this);
@@ -35,7 +35,7 @@ export class PreviousButton extends React.Component {
   }
 }
 
-export class NextButton extends React.Component {
+export class NextButton extends Component {
   constructor() {
     super(...arguments);
     this.handleClick = this.handleClick.bind(this);
@@ -110,7 +110,7 @@ export class NextButton extends React.Component {
   }
 }
 
-export class PagingDots extends React.Component {
+export class PagingDots extends Component {
   getDotIndexes(slideCount, slidesToScroll, slidesToShow, cellAlign) {
     const dotIndexes = [];
     let lastDotIndex = slideCount - slidesToShow;

@@ -1,4 +1,43 @@
-import React from 'react';
+const ARR = [];
+
+export const Children = {
+  map(children, fn, ctx) {
+    if (isNullOrUndef(children)) {
+      return children;
+    }
+    children = Children.toArray(children);
+    if (ctx && ctx !== children) {
+      fn = fn.bind(ctx);
+    }
+    return children.map(fn);
+  },
+  count(children) {
+    children = Children.toArray(children);
+    return children.length;
+  },
+  only(children) {
+    children = Children.toArray(children);
+    if (children.length !== 1) {
+      throw new Error('Children.only() expects only one child.');
+    }
+    return children[0];
+  },
+  toArray(children) {
+    if (isNullOrUndef(children)) {
+      return [];
+    }
+    // We need to flatten arrays here,
+    // because React does it also and application level code might depend on that behavior
+    if (isArray(children)) {
+      const result = [];
+
+      flatten(children, result);
+
+      return result;
+    }
+    return ARR.concat(children);
+  }
+}
 
 export const addEvent = function(elem, type, eventHandle) {
   if (elem === null || typeof elem === 'undefined') {
@@ -29,7 +68,7 @@ export const removeEvent = function(elem, type, eventHandle) {
 export const addAccessibility = (children, slidesToShow, currentSlide) => {
   let needsTabIndex;
   if (slidesToShow > 1) {
-    return React.Children.map(children, (child, index) => {
+    return Children.map(children, (child, index) => {
       const firstVisibleSlide = index >= currentSlide;
       const lastVisibleSlide = index < slidesToShow + currentSlide;
       needsTabIndex = firstVisibleSlide && lastVisibleSlide;
@@ -42,7 +81,7 @@ export const addAccessibility = (children, slidesToShow, currentSlide) => {
       });
     });
   } else {
-    return React.Children.map(children, (child, index) => {
+    return Children.map(children, (child, index) => {
       needsTabIndex = index !== currentSlide;
       const ariaProps = needsTabIndex
         ? { 'aria-hidden': 'true' }

@@ -1,9 +1,10 @@
-import React from 'react';
+import { Children } from './utilities'
+import { cloneVNode } from 'inferno-clone-vnode'
 
 export const addAccessibility = (children, slidesToShow, currentSlide) => {
   let needsTabIndex;
   if (slidesToShow > 1) {
-    return React.Children.map(children, (child, index) => {
+    return Children.map(children, (child, index) => {
       // create a range from first visible slide to last visible slide
       const firstVisibleSlide = index >= currentSlide;
       const lastVisibleSlide = index < slidesToShow + currentSlide;
@@ -11,20 +12,20 @@ export const addAccessibility = (children, slidesToShow, currentSlide) => {
       // if the index of the slide is in range add ariaProps to the slide
       const ariaProps = needsTabIndex
         ? { 'aria-hidden': 'false', tabIndex: 0 }
-        : { 'aria-hidden': 'true' };
-      return React.cloneElement(child, {
+        : { 'aria-hidden': 'true' }
+      return cloneVNode(child, {
         ...child.props,
         ...ariaProps
       });
     });
   } else {
     // when slidesToshow is 1
-    return React.Children.map(children, (child, index) => {
+    return Children.map(children, (child, index) => {
       needsTabIndex = index !== currentSlide;
       const ariaProps = needsTabIndex
         ? { 'aria-hidden': 'true' }
-        : { 'aria-hidden': 'false', tabIndex: 0 };
-      return React.cloneElement(child, {
+        : { 'aria-hidden': 'false', tabIndex: 0 }
+      return cloneVNode(child, {
         ...child.props,
         ...ariaProps
       });
@@ -34,7 +35,7 @@ export const addAccessibility = (children, slidesToShow, currentSlide) => {
 
 export const getValidChildren = children => {
   // .toArray automatically removes invalid React children
-  return React.Children.toArray(children);
+  return Children.toArray(children);
 };
 
 const findMaxHeightSlide = slides => {

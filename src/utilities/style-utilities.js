@@ -18,8 +18,8 @@ export const getDecoratorStyles = position => {
         top: 0,
         left: '50%',
         transform: 'translateX(-50%)',
-        WebkitTransform: 'translateX(-50%)',
-        msTransform: 'translateX(-50%)'
+        '-webkit-transform': 'translateX(-50%)',
+        '-ms-transform': 'translateX(-50%)'
       };
     }
     case 'TopRight': {
@@ -35,8 +35,8 @@ export const getDecoratorStyles = position => {
         top: '50%',
         left: 0,
         transform: 'translateY(-50%)',
-        WebkitTransform: 'translateY(-50%)',
-        msTransform: 'translateY(-50%)'
+        '-webkit-transform': 'translateY(-50%)',
+        '-ms-transform': 'translateY(-50%)'
       };
     }
     case 'CenterCenter': {
@@ -45,8 +45,8 @@ export const getDecoratorStyles = position => {
         top: '50%',
         left: '50%',
         transform: 'translate(-50%,-50%)',
-        WebkitTransform: 'translate(-50%, -50%)',
-        msTransform: 'translate(-50%, -50%)'
+        '-webkit-transform': 'translate(-50%, -50%)',
+        '-ms-transform': 'translate(-50%, -50%)'
       };
     }
     case 'CenterRight': {
@@ -55,8 +55,8 @@ export const getDecoratorStyles = position => {
         top: '50%',
         right: 0,
         transform: 'translateY(-50%)',
-        WebkitTransform: 'translateY(-50%)',
-        msTransform: 'translateY(-50%)'
+        '-webkit-transform': 'translateY(-50%)',
+        '-ms-transform': 'translateY(-50%)'
       };
     }
     case 'BottomLeft': {
@@ -72,8 +72,8 @@ export const getDecoratorStyles = position => {
         bottom: 0,
         left: '50%',
         transform: 'translateX(-50%)',
-        WebkitTransform: 'translateX(-50%)',
-        msTransform: 'translateX(-50%)'
+        '-webkit-transform': 'translateX(-50%)',
+        '-ms-transform': 'translateX(-50%)'
       };
     }
     case 'BottomRight': {
@@ -95,13 +95,13 @@ export const getDecoratorStyles = position => {
 
 export const getSliderStyles = (propWidth, stateSlideWidth) => {
   return {
-    boxSizing: 'border-box',
+    'box-sizing': 'border-box',
     display: 'block',
     height: 'auto',
-    MozBoxSizing: 'border-box',
+    '-moz-box-sizing': 'border-box',
     position: 'relative',
     visibility: stateSlideWidth ? 'inherit' : 'hidden',
-    width: propWidth
+    width: `${propWidth}px`
   };
 };
 
@@ -112,18 +112,18 @@ export const getFrameStyles = (
   stateFrameWidth
 ) => {
   return {
-    boxSizing: 'border-box',
+    'box-sizing': 'border-box',
     display: 'block',
     height: propVertical ? stateFrameWidth || 'initial' : '100%',
     margin: propFramePadding,
-    MozBoxSizing: 'border-box',
-    msTransform: 'translate(0, 0)',
+    '-moz-box-sizing': 'border-box',
+    '-ms-transform': 'translate(0, 0)',
     overflow: propFrameOverFlow,
     padding: 0,
     position: 'relative',
-    touchAction: `pinch-zoom ${propVertical ? 'pan-x' : 'pan-y'}`,
+    'touch-action': `pinch-zoom ${propVertical ? 'pan-x' : 'pan-y'}`,
     transform: 'translate3d(0, 0, 0)',
-    WebkitTransform: 'translate3d(0, 0, 0)'
+    '-webkit-transform': 'translate3d(0, 0, 0)'
   };
 };
 

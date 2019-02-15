@@ -1,9 +1,7 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import ExecutionEnvironment from 'exenv';
-import Animate from 'react-move/Animate';
-import * as easing from 'd3-ease';
-import { PagingDots, PreviousButton, NextButton } from './default-controls';
+import { Component } from 'inferno'
+import { Animate } from 'inferno-move'
+import * as easing from 'd3-ease'
+import { PagingDots, PreviousButton, NextButton } from './default-controls'
 import Transitions from './all-transitions';
 import AnnounceSlide, {
   defaultRenderAnnounceSlideMessage
@@ -29,7 +27,30 @@ import {
   getSlideHeight
 } from './utilities/bootstrapping-utilities';
 
-export default class Carousel extends React.Component {
+// **************** EXECUTION Environment *********************
+
+var canUseDOM = !!(
+  typeof window !== 'undefined' &&
+  window.document &&
+  window.document.createElement
+);
+
+var ExecutionEnvironment = {
+
+  canUseDOM: canUseDOM,
+
+  canUseWorkers: typeof Worker !== 'undefined',
+
+  canUseEventListeners:
+    canUseDOM && !!(window.addEventListener || window.attachEvent),
+
+  canUseViewport: canUseDOM && !!window.screen
+
+}
+
+// /**************** EXECUTION Environment *********************
+
+export default class Carousel extends Component {
   constructor() {
     super(...arguments);
 

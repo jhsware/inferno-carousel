@@ -1,5 +1,3 @@
-import React from 'react';
-
 const AnnounceSlide = ({ message }) => {
   const styles = {
     position: 'absolute',
