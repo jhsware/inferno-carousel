@@ -1,5 +1,5 @@
 {
-  "name": "inferno-carousel",
+  "name": "inferno-carousel-pure",
   "version": "7.0.0-beta.1",
   "description": "Pure Inferno Carousel",
   "main": "dist/index.cjs.js",
@@ -67,7 +67,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/jhsware/inferno-carousel.git"
+    "url": "https://github.com/jhsware/inferno-carousel-pure.git"
   },
   "keywords": [
     "inferno",
@@ -77,8 +77,8 @@
   "author": "Sebastian Ware",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/jhsware/inferno-carousel/issues"
+    "url": "https://github.com/jhsware/inferno-carousel-pure/issues"
   },
-  "homepage": "https://github.com/jhsware/inferno-carousel",
+  "homepage": "https://github.com/jhsware/inferno-carousel-pure",
   "sideEffects": false
 }
