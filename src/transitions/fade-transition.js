@@ -1,7 +1,7 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import { Component } from 'inferno'
+import { Children } from '../utilities/utilities'
 
-export default class FadeTransition extends React.Component {
+export default class FadeTransition extends Component {
   constructor(props) {
     super(props);
     this.fadeFromSlide = props.currentSlide;
@@ -9,7 +9,7 @@ export default class FadeTransition extends React.Component {
 
   formatChildren(children, opacity) {
     const { currentSlide, slidesToShow } = this.props;
-    return React.Children.map(children, (child, index) => {
+    return Children.map(children, (child, index) => {
       const visible =
         index >= currentSlide && index < currentSlide + slidesToShow;
       return (
@@ -65,22 +65,22 @@ export default class FadeTransition extends React.Component {
 
   getSlideStyles(index, data) {
     return {
-      boxSizing: 'border-box',
+      'box-sizing': 'border-box',
+      '-moz-box-sizing': 'border-box',
       display: 'block',
       height: 'auto',
-      left: data[index] ? data[index].left : 0,
-      listStyleType: 'none',
-      marginBottom: 'auto',
-      marginLeft: this.props.cellSpacing / 2,
-      marginRight: this.props.cellSpacing / 2,
-      marginTop: 'auto',
-      MozBoxSizing: 'border-box',
+      left: data[index] ? `${data[index].left}px` : 0,
+      'list-style-type': 'none',
+      'margin-bottom': 'auto',
+      'margin-left': `${this.props.cellSpacing / 2}px`,
+      'margin-right': `${this.props.cellSpacing / 2}px`,
+      'margin-top': 'auto',
       opacity: data[index] ? data[index].opacity : 0,
       position: 'absolute',
       top: 0,
-      verticalAlign: 'top',
+      'vertical-align': 'top',
       visibility: data[index] ? 'inherit' : 'hidden',
-      width: this.props.slideWidth
+      width: `${this.props.slideWidth}px`
     };
   }
 
@@ -88,16 +88,16 @@ export default class FadeTransition extends React.Component {
     const width = this.props.slideWidth * this.props.slidesToShow;
 
     return {
-      boxSizing: 'border-box',
+      'box-sizing': 'border-box',
+      '-moz-box-sizing': 'border-box',
       cursor: this.props.dragging === true ? 'pointer' : 'inherit',
       display: 'block',
-      height: this.props.slideHeight,
+      height: `${this.props.slideHeight}px`,
       margin: this.props.vertical
         ? `${(this.props.cellSpacing / 2) * -1}px 0px`
         : `0px ${(this.props.cellSpacing / 2) * -1}px`,
-      MozBoxSizing: 'border-box',
       padding: 0,
-      touchAction: 'none',
+      'touch-action': 'none',
       width
     };
   }
@@ -129,6 +129,7 @@ export default class FadeTransition extends React.Component {
   }
 }
 
+/*
 FadeTransition.propTypes = {
   cellSpacing: PropTypes.number,
   currentSlide: PropTypes.number,
@@ -145,6 +146,7 @@ FadeTransition.propTypes = {
   vertical: PropTypes.bool,
   wrapAround: PropTypes.bool
 };
+*/
 
 FadeTransition.defaultProps = {
   cellSpacing: 0,

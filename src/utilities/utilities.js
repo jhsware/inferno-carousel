@@ -38,6 +38,7 @@ export const Children = {
     return ARR.concat(children);
   }
 }
+import { cloneVNode } from 'inferno-clone-vnode'
 
 export const addEvent = function(elem, type, eventHandle) {
   if (elem === null || typeof elem === 'undefined') {
@@ -75,7 +76,7 @@ export const addAccessibility = (children, slidesToShow, currentSlide) => {
       const ariaProps = needsTabIndex
         ? { 'aria-hidden': 'false', tabIndex: 0 }
         : { 'aria-hidden': 'true' };
-      return React.cloneElement(child, {
+      return cloneVNode(child, {
         ...child.props,
         ...ariaProps
       });
@@ -86,7 +87,7 @@ export const addAccessibility = (children, slidesToShow, currentSlide) => {
       const ariaProps = needsTabIndex
         ? { 'aria-hidden': 'true' }
         : { 'aria-hidden': 'false', tabIndex: 0 };
-      return React.cloneElement(child, {
+      return cloneVNode(child, {
         ...child.props,
         ...ariaProps
       });

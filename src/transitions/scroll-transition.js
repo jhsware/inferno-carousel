@@ -1,10 +1,10 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import { Component } from 'inferno'
+import { Children } from '../utilities/utilities'
 
 const MIN_ZOOM_SCALE = 0;
 const MAX_ZOOM_SCALE = 1;
 
-export default class ScrollTransition extends React.Component {
+export default class ScrollTransition extends Component {
   constructor(props) {
     super(props);
 
@@ -88,7 +88,7 @@ export default class ScrollTransition extends React.Component {
   formatChildren(children) {
     const { top, left, currentSlide, slidesToShow } = this.props;
     const positionValue = this.props.vertical ? top : left;
-    return React.Children.map(children, (child, index) => {
+    return Children.map(children, (child, index) => {
       const visible =
         index >= currentSlide && index < currentSlide + slidesToShow;
       return (
@@ -113,50 +113,50 @@ export default class ScrollTransition extends React.Component {
           )
         : 1.0;
     return {
-      boxSizing: 'border-box',
+      'box-sizing': 'border-box',
       display: this.props.vertical ? 'block' : 'inline-block',
       height: 'auto',
-      left: this.props.vertical ? 0 : targetPosition,
-      listStyleType: 'none',
-      marginBottom: this.props.vertical ? this.props.cellSpacing / 2 : 'auto',
-      marginLeft: this.props.vertical ? 'auto' : this.props.cellSpacing / 2,
-      marginRight: this.props.vertical ? 'auto' : this.props.cellSpacing / 2,
-      marginTop: this.props.vertical ? this.props.cellSpacing / 2 : 'auto',
-      MozBoxSizing: 'border-box',
+      left: this.props.vertical ? 0 : `${targetPosition}px`,
+      'list-style-type': 'none',
+      'margin-bottom': this.props.vertical ? `${(this.props.cellSpacing / 2)}px` : 'auto',
+      'margin-left': this.props.vertical ? 'auto' : `${(this.props.cellSpacing / 2)}px`,
+      'margin-right': this.props.vertical ? 'auto' : `${(this.props.cellSpacing / 2)}px`,
+      'margin-top': this.props.vertical ? `${(this.props.cellSpacing / 2)}px` : 'auto',
+      '-moz-box-sizing': 'border-box',
       position: 'absolute',
-      top: this.props.vertical ? targetPosition : 0,
+      top: this.props.vertical ? `${targetPosition}px` : 0,
       transform: `scale(${transformScale})`,
       transition: 'transform .4s linear',
-      verticalAlign: 'top',
-      width: this.props.vertical ? '100%' : this.props.slideWidth
+      'vertical-align': 'top',
+      width: this.props.vertical ? '100%' : `${this.props.slideWidth}px`
     };
   }
 
   getListStyles(styles) {
     const { deltaX, deltaY } = styles;
     const listWidth =
-      this.props.slideWidth * React.Children.count(this.props.children);
+      this.props.slideWidth * Children.count(this.props.children);
     const spacingOffset =
-      this.props.cellSpacing * React.Children.count(this.props.children);
+      this.props.cellSpacing * Children.count(this.props.children);
     const transform = `translate3d(${deltaX}px, ${deltaY}px, 0)`;
     return {
       transform,
-      WebkitTransform: transform,
-      msTransform: `translate(${deltaX}px, ${deltaY}px)`,
+      '-webkit-transform': transform,
+      '-ms-transform': `translate(${deltaX}px, ${deltaY}px)`,
       position: 'relative',
       display: 'block',
       margin: this.props.vertical
         ? `${(this.props.cellSpacing / 2) * -1}px 0px`
         : `0px ${(this.props.cellSpacing / 2) * -1}px`,
       padding: 0,
-      height: this.props.vertical
+      height: `${this.props.vertical
         ? listWidth + spacingOffset
-        : this.props.slideHeight,
-      width: this.props.vertical ? 'auto' : listWidth + spacingOffset,
+        : this.props.slideHeight}px`,
+      width: this.props.vertical ? 'auto' : `${listWidth + spacingOffset}px`,
       cursor: this.props.dragging === true ? 'pointer' : 'inherit',
-      boxSizing: 'border-box',
-      MozBoxSizing: 'border-box',
-      touchAction: `pinch-zoom ${this.props.vertical ? 'pan-x' : 'pan-y'}`
+      'box-sizing': 'border-box',
+      'moz-box-sizing': 'border-box',
+      'touch-action': `pinch-zoom ${this.props.vertical ? 'pan-x' : 'pan-y'}`
     };
   }
 
@@ -176,6 +176,7 @@ export default class ScrollTransition extends React.Component {
   }
 }
 
+/*
 ScrollTransition.propTypes = {
   animation: PropTypes.oneOf(['zoom']),
   cellSpacing: PropTypes.number,
@@ -194,6 +195,7 @@ ScrollTransition.propTypes = {
   wrapAround: PropTypes.bool,
   zoomScale: PropTypes.number
 };
+*/
 
 ScrollTransition.defaultProps = {
   cellSpacing: 0,

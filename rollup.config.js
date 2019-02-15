@@ -30,6 +30,7 @@ export default {
     'classnames',
     'inferno',
     'inferno-animation',
+    'inferno-clone-vnode',
     'inferno-create-element',
     'inferno-shared',
     '@babel/runtime/helpers/defineProperty',

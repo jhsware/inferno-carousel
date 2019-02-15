@@ -1002,6 +1002,7 @@ export default class Carousel extends Component {
   }
 }
 
+/*
 Carousel.propTypes = {
   afterSlide: PropTypes.func,
   animation: PropTypes.oneOf(['zoom']),
@@ -1049,6 +1050,7 @@ Carousel.propTypes = {
   withoutControls: PropTypes.bool,
   wrapAround: PropTypes.bool
 };
+*/
 
 Carousel.defaultProps = {
   afterSlide() {},
@@ -1086,5 +1088,3 @@ Carousel.defaultProps = {
   withoutControls: false,
   wrapAround: false
 };
-
-export { NextButton, PreviousButton, PagingDots };
