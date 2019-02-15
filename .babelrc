@@ -1,0 +1,24 @@
+{
+  "presets": [
+    ["@babel/env", {
+      "modules": false,
+      "targets": {
+        "browsers": ["last 2 versions", ">2%"]
+      }
+    }]
+  ],
+  "plugins": [
+    "add-module-exports",      
+    "@babel/proposal-class-properties",
+    "@babel/transform-runtime",
+    "@babel/syntax-object-rest-spread",
+    "@babel/syntax-jsx",
+    [
+      "babel-plugin-inferno",
+      {
+        "imports": true
+      }
+    ]
+  ]
+}
+
