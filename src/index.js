@@ -662,19 +662,28 @@ export default class Carousel extends Component {
 
     this.props.beforeSlide(this.state.currentSlide, index);
 
-    this.setState(
-      {
-        currentSlide: index
-      },
-      () =>
-        setTimeout(() => {
-          this.resetAutoplay();
-          this.isTransitioning = false;
-          if (index !== previousSlide) {
-            this.props.afterSlide(index);
-          }
-        }, props.speed)
-    );
+    // Do some cleanup when the last render is done
+    const callback = () => setTimeout(() => {
+      this.resetAutoplay();
+      this.isTransitioning = false;
+      if (index !== previousSlide) {
+        this.props.afterSlide(index);
+      }
+    }, props.speed)
+
+    // MAke sure we re-render even when we aren't changing slides
+    if (index === this.state.currentSlide) {
+      // touchObject is reset at end of handleSwipe
+      this.touchObject = {}
+      this.forceUpdate(callback)
+    } else {
+      this.setState(
+        {
+          currentSlide: index
+        },
+        callback
+      )
+    }
   }
 
   nextSlide() {
