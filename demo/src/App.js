@@ -36,7 +36,7 @@ class App extends Component {
 
   render() {
     return (
-      <div style={{ width: '50%', margin: 'auto' }}>
+      <div className="carousel">
         <Carousel
           slidesToShow={this.state.slidesToShow}
           slidesToScroll={this.state.slidesToScroll}

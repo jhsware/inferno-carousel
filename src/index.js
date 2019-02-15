@@ -673,7 +673,8 @@ export default class Carousel extends Component {
 
     // MAke sure we re-render even when we aren't changing slides
     if (index === this.state.currentSlide) {
-      // touchObject is reset at end of handleSwipe
+      // We need to reset touchObject in order for incomplete swipes to result
+      // in animating the slide back to original position
       this.touchObject = {}
       this.forceUpdate(callback)
     } else {
@@ -902,6 +903,8 @@ export default class Carousel extends Component {
       renderAnnounceSlideMessage,
       disableAnimation
     } = this.props;
+
+    /* This is where we determine if an animation is to be performed */
     const duration =
       this.state.dragging ||
       this.state.resetWrapAroundPosition ||
