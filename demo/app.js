@@ -1,10 +1,9 @@
-import Carousel from '../src/index';
-import React from 'react';
-import ReactDom from 'react-dom';
+import { Component, Fragment } from 'inferno';
+import Carousel from 'inferno-carousel/src/index';
 
 const colors = ['7732bb', '047cc0', '00884b', 'e3bc13', 'db7c00', 'aa231f'];
 
-class App extends React.Component {
+class App extends Component {
   constructor() {
     super(...arguments);
     this.state = {
@@ -125,7 +124,7 @@ class App extends React.Component {
           </div>
         </div>
         {this.state.transitionMode !== 'fade' && (
-          <>
+          <Fragment>
             <div style={{ display: 'flex', justifyContent: 'space-between' }}>
               {this.state.slidesToShow > 1.0 && (
                 <div>
@@ -194,11 +193,11 @@ class App extends React.Component {
                 {this.state.animation === 'zoom' ? 'Off' : 'On'}
               </button>
             </div>
-          </>
+          </Fragment>
         )}
       </div>
     );
   }
 }
 
-ReactDom.render(<App />, document.getElementById('content'));
+export default App
