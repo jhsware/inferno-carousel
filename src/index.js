@@ -647,17 +647,18 @@ export default class Carousel extends Component {
             currentSlide: endSlide,
             isWrappingAround: true,
             wrapToIndex: index
-          }),
-          () => {
-            setTimeout(() => {
-              this.resetAutoplay();
-              this.isTransitioning = false;
-              if (index !== previousSlide) {
-                this.props.afterSlide(this.state.slideCount - 1);
-              }
-            }, props.speed);
-          }
+          })
         );
+
+        // Inferno has synchronous setState
+        setTimeout(() => {
+          this.resetAutoplay();
+          this.isTransitioning = false;
+          if (index !== previousSlide) {
+            this.props.afterSlide(this.state.slideCount - 1);
+          }
+        }, props.speed);
+
         return;
       }
     }
@@ -683,9 +684,9 @@ export default class Carousel extends Component {
       this.setState(
         {
           currentSlide: index
-        },
-        callback
+        }
       )
+      callback()
     }
   }
 
@@ -837,12 +838,10 @@ export default class Carousel extends Component {
         cellAlign,
         left: props.vertical ? 0 : this.getTargetLeft(),
         top: props.vertical ? this.getTargetLeft() : 0
-      },
-      () => {
-        stateCb();
-        this.setLeft();
       }
     );
+    stateCb();
+    this.setLeft();
   }
 
   getChildNodes() {
