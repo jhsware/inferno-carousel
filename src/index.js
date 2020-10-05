@@ -179,13 +179,29 @@ export default class Carousel extends Component {
     if (slideChanged || heightModeChanged) {
       this.setSlideHeightAndWidth();
     }
+    requestAnimationFrame(this._checkSlideDimensions);
   }
-
+  
   componentWillUnmount() {
     this.unbindEvents();
     this.stopAutoplay();
     // see https://github.com/facebook/react/issues/3417#issuecomment-121649937
     this.mounted = false;
+  }
+
+  _checkSlideDimensions = () => {
+    // Continously check slide dimensions until unmounted
+    if (!this.$UN) {
+      let { slideHeight, slideWidth } = this.calcSlideHeightAndWidth();
+
+      if (
+        slideHeight != this.state.slideHeight
+        || slideWidth != this.state.slideWidth
+      ) {
+        this.setState({ slideHeight, slideWidth });
+      }
+      requestAnimationFrame(this._checkSlideDimensions);
+    }
   }
 
   getTouchEvents() {
