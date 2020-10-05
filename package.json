@@ -1,6 +1,6 @@
 {
   "name": "inferno-carousel-pure",
-  "version": "7.0.0-beta.2",
+  "version": "7.0.0-beta.3",
   "description": "Pure Inferno Carousel",
   "main": "dist/index.cjs.js",
   "module": "lib/index.js",
