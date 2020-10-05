@@ -1,13 +1,5 @@
 import { Component } from 'inferno'
-
-const defaultButtonStyles = disabled => ({
-  border: 0,
-  background: 'rgba(0,0,0,0.4)',
-  color: 'white',
-  padding: 10,
-  opacity: disabled ? 0.3 : 1,
-  cursor: disabled ? 'not-allowed' : 'pointer'
-});
+import classnames from 'classnames'
 
 export class PreviousButton extends Component {
   constructor() {
@@ -22,15 +14,16 @@ export class PreviousButton extends Component {
     const disabled =
       (this.props.currentSlide === 0 && !this.props.wrapAround) ||
       this.props.slideCount === 0;
+
+    let cls = {
+      'disabled': disabled
+    }
     return (
       <button
-        style={defaultButtonStyles(disabled)}
+        className={classnames('carousel-nav', 'carousel-nav-prev', cls)}
         disabled={disabled}
         onClick={this.handleClick}
-        aria-label="previous"
-      >
-        PREV
-      </button>
+        aria-label="previous" />
     );
   }
 }
@@ -97,15 +90,16 @@ export class NextButton extends Component {
       slideCount
     });
 
+    let cls = {
+      'disabled': disabled
+    }
+
     return (
       <button
-        style={defaultButtonStyles(disabled)}
+        className={classnames('carousel-nav', 'carousel-nav-next', cls)}
         disabled={disabled}
         onClick={this.handleClick}
-        aria-label="next"
-      >
-        NEXT
-      </button>
+        aria-label="next" />
     );
   }
 }
@@ -132,34 +126,6 @@ export class PagingDots extends Component {
     return dotIndexes;
   }
 
-  getListStyles() {
-    return {
-      position: 'relative',
-      margin: 0,
-      top: -10,
-      padding: 0
-    };
-  }
-
-  getListItemStyles() {
-    return {
-      listStyleType: 'none',
-      display: 'inline-block'
-    };
-  }
-
-  getButtonStyles(active) {
-    return {
-      border: 0,
-      background: 'transparent',
-      color: 'black',
-      cursor: 'pointer',
-      padding: 10,
-      fontSize: 24,
-      opacity: active ? 1 : 0.5
-    };
-  }
-
   render() {
     const indexes = this.getDotIndexes(
       this.props.slideCount,
@@ -168,17 +134,14 @@ export class PagingDots extends Component {
       this.props.cellAlign
     );
     return (
-      <ul style={this.getListStyles()}>
+      <ul className="carousel-control">
         {indexes.map(index => {
           return (
-            <li style={this.getListItemStyles()} key={index}>
+            <li className="carousel-control-dot" key={index}>
               <button
-                style={this.getButtonStyles(this.props.currentSlide === index)}
+                className={this.props.currentSlide === index ? 'active' : undefined}
                 onClick={this.props.goToSlide.bind(null, index)}
-                aria-label={`slide ${index + 1} bullet`}
-              >
-                &bull;
-              </button>
+                aria-label={`slide ${index + 1} bullet`} />
             </li>
           );
         })}
