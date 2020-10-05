@@ -83,32 +83,6 @@ export default class Carousel extends Component {
       wrapToIndex: null,
       ...calcSomeInitialState(this.props)
     };
-
-    this.autoplayIterator = this.autoplayIterator.bind(this);
-    this.calcSlideHeightAndWidth = this.calcSlideHeightAndWidth.bind(this);
-    this.getChildNodes = this.getChildNodes.bind(this);
-    this.getMouseEvents = this.getMouseEvents.bind(this);
-    this.getOffsetDeltas = this.getOffsetDeltas.bind(this);
-    this.getTargetLeft = this.getTargetLeft.bind(this);
-    this.getTouchEvents = this.getTouchEvents.bind(this);
-    this.goToSlide = this.goToSlide.bind(this);
-    this.handleClick = this.handleClick.bind(this);
-    this.handleKeyPress = this.handleKeyPress.bind(this);
-    this.handleMouseOut = this.handleMouseOut.bind(this);
-    this.handleMouseOver = this.handleMouseOver.bind(this);
-    this.handleSwipe = this.handleSwipe.bind(this);
-    this.nextSlide = this.nextSlide.bind(this);
-    this.onReadyStateChange = this.onReadyStateChange.bind(this);
-    this.onResize = this.onResize.bind(this);
-    this.onVisibilityChange = this.onVisibilityChange.bind(this);
-    this.previousSlide = this.previousSlide.bind(this);
-    this.renderControls = this.renderControls.bind(this);
-    this.resetAutoplay = this.resetAutoplay.bind(this);
-    this.setDimensions = this.setDimensions.bind(this);
-    this.setLeft = this.setLeft.bind(this);
-    this.setSlideHeightAndWidth = this.setSlideHeightAndWidth.bind(this);
-    this.startAutoplay = this.startAutoplay.bind(this);
-    this.stopAutoplay = this.stopAutoplay.bind(this);
   }
 
   componentDidMount() {
@@ -204,7 +178,7 @@ export default class Carousel extends Component {
     }
   }
 
-  getTouchEvents() {
+  getTouchEvents = () => {
     if (this.props.swiping === false) {
       return {
         onTouchStart: () => {
@@ -285,7 +259,7 @@ export default class Carousel extends Component {
     };
   }
 
-  getMouseEvents() {
+  getMouseEvents = () => {
     if (this.props.dragging === false) {
       return {
         onMouseOver: () => this.handleMouseOver(),
@@ -383,33 +357,33 @@ export default class Carousel extends Component {
     };
   }
 
-  pauseAutoplay() {
+  pauseAutoplay = () => {
     if (this.props.autoplay) {
       this.autoplayPaused = true;
       this.stopAutoplay();
     }
   }
 
-  unpauseAutoplay() {
+  unpauseAutoplay = () => {
     if (this.props.autoplay && this.autoplayPaused) {
       this.startAutoplay();
       this.autoplayPaused = null;
     }
   }
 
-  handleMouseOver() {
+  handleMouseOver = () => {
     if (this.props.pauseOnHover) {
       this.pauseAutoplay();
     }
   }
 
-  handleMouseOut() {
+  handleMouseOut = () => {
     if (this.autoplayPaused) {
       this.unpauseAutoplay();
     }
   }
 
-  handleClick(event) {
+  handleClick = (event) => {
     if (this.clickDisabled === true) {
       if (event.metaKey || event.shiftKey || event.altKey || event.ctrlKey) {
         return;
@@ -423,7 +397,7 @@ export default class Carousel extends Component {
     }
   }
 
-  handleSwipe() {
+  handleSwipe = () => {
     let slidesToShow = this.state.slidesToShow;
     if (this.props.slidesToScroll === 'auto') {
       slidesToShow = this.state.slidesToScroll;
@@ -458,8 +432,9 @@ export default class Carousel extends Component {
     }, 0);
     this.touchObject = {};
   }
+
   // eslint-disable-next-line complexity
-  handleKeyPress(e) {
+  handleKeyPress = (e) => {
     if (this.props.enableKeyboardControls) {
       switch (e.keyCode) {
         case 39:
@@ -494,7 +469,7 @@ export default class Carousel extends Component {
     }
   }
 
-  autoplayIterator() {
+  autoplayIterator = () => {
     if (this.props.wrapAround) {
       this.nextSlide();
       return;
@@ -509,21 +484,21 @@ export default class Carousel extends Component {
     }
   }
 
-  startAutoplay() {
+  startAutoplay = () => {
     this.autoplayID = setInterval(
       this.autoplayIterator,
       this.props.autoplayInterval
     );
   }
 
-  resetAutoplay() {
+  resetAutoplay = () => {
     if (this.props.autoplay && !this.autoplayPaused) {
       this.stopAutoplay();
       this.startAutoplay();
     }
   }
 
-  stopAutoplay() {
+  stopAutoplay = () => {
     if (this.autoplayID) {
       clearInterval(this.autoplayID);
     }
@@ -531,7 +506,7 @@ export default class Carousel extends Component {
 
   // Animation Method
 
-  getTargetLeft(touchOffset, slide) {
+  getTargetLeft = (touchOffset, slide) => {
     let offset;
     const target = slide || this.state.currentSlide;
     switch (this.state.cellAlign) {
@@ -575,7 +550,7 @@ export default class Carousel extends Component {
     return (left - offset) * -1;
   }
 
-  getOffsetDeltas() {
+  getOffsetDeltas = () => {
     let offset = 0;
 
     if (this.state.isWrappingAround) {
@@ -594,7 +569,7 @@ export default class Carousel extends Component {
 
   // Action Methods
 
-  goToSlide(index, props) {
+  goToSlide = (index, props) => {
     if (props === undefined) {
       props = this.props;
     }
@@ -706,7 +681,7 @@ export default class Carousel extends Component {
     }
   }
 
-  nextSlide() {
+  nextSlide = () => {
     const childrenCount = this.state.slideCount;
     let slidesToShow = this.state.slidesToShow;
 
@@ -738,7 +713,7 @@ export default class Carousel extends Component {
     }
   }
 
-  previousSlide() {
+  previousSlide = () => {
     if (this.state.currentSlide <= 0 && !this.props.wrapAround) {
       return;
     }
@@ -754,7 +729,7 @@ export default class Carousel extends Component {
 
   // Bootstrapping
 
-  bindEvents() {
+  bindEvents = () => {
     if (ExecutionEnvironment.canUseDOM) {
       addEvent(window, 'resize', this.onResize);
       addEvent(document, 'readystatechange', this.onReadyStateChange);
@@ -763,15 +738,15 @@ export default class Carousel extends Component {
     }
   }
 
-  onResize() {
+  onResize = () => {
     this.setDimensions(null, this.props.onResize);
   }
 
-  onReadyStateChange() {
+  onReadyStateChange = () => {
     this.setDimensions();
   }
 
-  onVisibilityChange() {
+  onVisibilityChange = () => {
     if (document.hidden) {
       this.pauseAutoplay();
     } else {
@@ -779,7 +754,7 @@ export default class Carousel extends Component {
     }
   }
 
-  unbindEvents() {
+  unbindEvents = () => {
     if (ExecutionEnvironment.canUseDOM) {
       removeEvent(window, 'resize', this.onResize);
       removeEvent(document, 'readystatechange', this.onReadyStateChange);
@@ -788,7 +763,7 @@ export default class Carousel extends Component {
     }
   }
 
-  calcSlideHeightAndWidth(props) {
+  calcSlideHeightAndWidth = (props) => {
     // slide height
     props = props || this.props;
     const childNodes = this.getChildNodes();
@@ -816,11 +791,11 @@ export default class Carousel extends Component {
     return { slideHeight, slideWidth };
   }
 
-  setSlideHeightAndWidth() {
+  setSlideHeightAndWidth = () => {
     this.setState(this.calcSlideHeightAndWidth());
   }
 
-  setDimensions(props, stateCb = () => {}) {
+  setDimensions = (props, stateCb = () => {}) => {
     props = props || this.props;
 
     const { slidesToShow, cellAlign } = getPropsByTransitionMode(props, [
@@ -860,11 +835,11 @@ export default class Carousel extends Component {
     this.setLeft();
   }
 
-  getChildNodes() {
+  getChildNodes = () => {
     return this.frame.childNodes[0].childNodes;
   }
 
-  setLeft() {
+  setLeft = () => {
     const newLeft = this.props.vertical ? 0 : this.getTargetLeft();
     const newTop = this.props.vertical ? this.getTargetLeft() : 0;
 
@@ -876,7 +851,7 @@ export default class Carousel extends Component {
     }
   }
 
-  renderControls() {
+  renderControls = () => {
     if (this.props.withoutControls) {
       return this.controlsMap.map(() => null);
     } else {
