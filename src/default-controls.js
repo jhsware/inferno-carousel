@@ -20,7 +20,7 @@ export class PreviousButton extends Component {
     }
     return (
       <button
-        className={classnames('carousel-nav', 'carousel-nav-prev', cls)}
+        className={classnames('carousel-nav', 'prev', cls)}
         disabled={disabled}
         onClick={this.handleClick}
         aria-label="previous" />
@@ -96,7 +96,7 @@ export class NextButton extends Component {
 
     return (
       <button
-        className={classnames('carousel-nav', 'carousel-nav-next', cls)}
+        className={classnames('carousel-nav', 'next', cls)}
         disabled={disabled}
         onClick={this.handleClick}
         aria-label="next" />
